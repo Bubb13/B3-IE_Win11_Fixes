@@ -1,0 +1,23 @@
+BACKUP ~weidu_external/B3-IE_Win11_Fixes/backup~
+AUTHOR ~Bubb~
+VERSION ~v1.0~
+
+AUTO_TRA ~B3-IE_Win11_Fixes/language/%s~
+LANGUAGE ~English~ ~english~ ~B3-IE_Win11_Fixes/language/english/setup.tra~
+
+BEGIN @0 LABEL ~B3-IE_Win11_Fixes-Main~
+REQUIRE_PREDICATE GAME_IS ~tob totlm~ @1000
+
+	ACTION_IF GAME_IS ~tob~ BEGIN
+		OUTER_SPRINT gameFolderName ~oBG2~
+	END ELSE ACTION_IF GAME_IS ~totlm~ BEGIN
+		OUTER_SPRINT gameFolderName ~oIWD~
+	END ELSE BEGIN
+		FAIL @1000
+	END
+
+	COPY ~B3-IE_Win11_Fixes/loader/always~ ~.~
+	COPY ~B3-IE_Win11_Fixes/loader/%gameFolderName%~ ~.~
+
+	COPY ~B3-IE_Win11_Fixes/copy/always~ ~IEex_scripts~
+	COPY ~B3-IE_Win11_Fixes/copy/%gameFolderName%~ ~IEex_scripts~
